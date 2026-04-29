@@ -39,3 +39,29 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# --- Drizzle ---
+# Drizzle Kit snapshot and local state
+.drizzle/
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs & Cache ---
+*.log
+*.log.*
+.eslintcache
+.stylelintcache
+.turbo/
+.cache/
+
+# --- OS Specific ---
+Thumbs.db
+ehthumbs.db
+
+# --- Database / Sensitive ---
+# If you ever create local sqlite test databases
+*.db

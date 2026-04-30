@@ -1,11 +1,12 @@
 import { defineConfig } from "drizzle-kit";
+import { env } from "@/lib/validators/env";
 
 export default defineConfig({
   dialect: "postgresql",
-  schema: "./src/lib/db/schema.ts",
+  schema: "./src/db/schema.ts",
   out: "./drizzle",
   verbose: true,
   dbCredentials: {
-    url: process.env.DATABASE_URL as string,
+    url: env.DATABASE_URL,
   },
 });

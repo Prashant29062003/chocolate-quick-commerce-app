@@ -1,3 +1,4 @@
+import "@/lib/validators/env";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

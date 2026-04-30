@@ -8,6 +8,13 @@
       "when": 1777477938275,
       "tag": "0000_third_mentallo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777483248108,
+      "tag": "0001_curious_human_cannonball",
+      "breakpoints": true
     }
   ]
 }

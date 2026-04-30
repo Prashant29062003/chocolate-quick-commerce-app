@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ZodError } from "zod";
 
 export function apiResponse<T>(
   data: T,
@@ -23,11 +24,16 @@ export function apiError(
   status: number = 500,
   errors: any = null
 ) {
+  let fonrmatedErrors = errors;
+
+  if (errors instanceof ZodError) {
+    fonrmatedErrors = errors.flatten().fieldErrors;
+  }
   return NextResponse.json(
     {
       success: false,
       message,
-      errors,
+      ...(errors != null && { errors: fonrmatedErrors }),
     },
     { status }
   );

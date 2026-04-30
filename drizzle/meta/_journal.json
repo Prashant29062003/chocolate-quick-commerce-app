@@ -15,6 +15,13 @@
       "when": 1777483248108,
       "tag": "0001_curious_human_cannonball",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777525065049,
+      "tag": "0002_aspiring_dust",
+      "breakpoints": true
     }
   ]
 }

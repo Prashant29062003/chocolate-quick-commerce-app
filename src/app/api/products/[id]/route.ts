@@ -22,7 +22,7 @@ export async function GET(
       .limit(1);
 
     if (!product.length) {
-      return apiResponse(null, "Product not found", 400);
+      return apiResponse(null, "Product not found", 404);
     }
 
     return apiResponse(product[0], "Successfully fetched data", 200);

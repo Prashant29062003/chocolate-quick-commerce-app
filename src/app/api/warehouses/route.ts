@@ -22,3 +22,12 @@ export async function POST(request: Request) {
     return apiError("Failed to store the warehouses", 500);
   }
 }
+
+export async function GET(request: Request) {
+  try {
+    const allWarehouses = await db.select().from(warehouses);
+    return apiResponse(allWarehouses);
+  } catch (err) {
+    return apiError("Failed to fetch all warehouses", 500);
+  }
+}

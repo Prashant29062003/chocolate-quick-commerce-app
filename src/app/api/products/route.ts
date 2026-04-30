@@ -45,8 +45,6 @@ export async function POST(request: Request) {
     await unlink(filePath).catch(() => {}); // Silent catch in case of file didn't exist
     return apiError("Database insertion failed", 500, err);
   }
-
-  return apiResponse(null, "OK", 201);
 }
 
 export async function GET(request: Request) {

@@ -10,7 +10,8 @@ export function apiResponse<T>(
     {
       success: true,
       message,
-      meta,
+      // Only include meta if it's not null
+      ...(meta != null && { meta }),
       data,
     },
     { status }

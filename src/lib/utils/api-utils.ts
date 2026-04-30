@@ -3,12 +3,14 @@ import { NextResponse } from "next/server";
 export function apiResponse<T>(
   data: T,
   message: string = "Success",
-  status: number = 200
+  status: number = 200,
+  meta: any = null
 ) {
   return NextResponse.json(
     {
       success: true,
       message,
+      meta,
       data,
     },
     { status }

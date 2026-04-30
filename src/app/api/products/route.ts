@@ -4,6 +4,7 @@ import { apiError, apiResponse } from "@/lib/utils/api-utils";
 import { productSchema } from "@/lib/validators/productSchema";
 import { unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { desc, count } from "drizzle-orm";
 
 export async function POST(request: Request) {
   // TODO: Check User Access.
@@ -46,4 +47,25 @@ export async function POST(request: Request) {
   }
 
   return apiResponse(null, "OK", 201);
+}
+
+export async function GET(request: Request) {
+  try {
+    const allProducts = await db
+      .select()
+      .from(products)
+      .orderBy(desc(products.id));
+
+    // Total Products
+    const [totalQuery] = await db.select({ value: count() }).from(products);
+    const total = totalQuery.value;
+    return apiResponse(
+      allProducts,
+      "Successfully fetched all products data",
+      200,
+      { totalProducts: total }
+    );
+  } catch (err) {
+    return apiError("Failed to fetch data", 500, err);
+  }
 }

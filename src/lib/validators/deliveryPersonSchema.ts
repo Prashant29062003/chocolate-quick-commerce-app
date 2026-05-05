@@ -6,10 +6,10 @@ export const deliveryPersonSchema = z.object({
     .min(2, "Name must be at least 2 characters")
     .trim(),
 
-  phone: z.regex(
-    /^\+?[1-9]\d{1,12}$/,
-    "Invalid phone number format (e.g., +911234567890)"
-  ),
+  phone: z
+    .string({ message: "Phone number is required" })
+    // Regex handles the format validation
+    .regex(/^\+?[1-9]\d{1,12}$/, "Invalid phone number format"),
 
   warehouseId: z.coerce
     .number({ message: "Warehouse ID must be a number" })

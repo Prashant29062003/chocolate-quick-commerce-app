@@ -6,17 +6,17 @@ import { deliveryPersonSchema } from "@/lib/validators/deliveryPersonSchema";
 export async function POST(request: Request) {
   const requestData = await request.json();
 
-  let validateData;
+  let validatedData;
   try {
-    validateData = deliveryPersonSchema.parse(requestData);
+    validatedData = deliveryPersonSchema.parse(requestData);
   } catch (err) {
     return apiError("Validation error", 400, err);
   }
 
   try {
-    await db.insert(deliveryPersons).values(validateData);
+    await db.insert(deliveryPersons).values(validatedData);
     return apiResponse(
-      validateData,
+      validatedData,
       "Delivery person inserted in database",
       201
     );

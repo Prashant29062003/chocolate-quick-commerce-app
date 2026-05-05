@@ -29,6 +29,20 @@
       "when": 1777539216529,
       "tag": "0003_special_lake",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1777652778004,
+      "tag": "0004_dark_jigsaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1778004793142,
+      "tag": "0005_chilly_kronos",
+      "breakpoints": true
     }
   ]
 }

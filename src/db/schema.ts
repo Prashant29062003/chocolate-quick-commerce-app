@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import {
   integer,
   pgTable,
@@ -18,8 +17,13 @@ export const users = pgTable("users", {
   externalId: varchar("externalId", { length: 100 }).notNull(),
   image: text("image"),
   role: varchar("role", { length: 12 }).notNull().default("customer"),
-  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
-  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 export const products = pgTable("products", {
@@ -28,8 +32,13 @@ export const products = pgTable("products", {
   image: text("image"),
   description: text("description"),
   price: integer("price").notNull(),
-  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
-  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 export const warehouses = pgTable(
@@ -38,8 +47,13 @@ export const warehouses = pgTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 100 }).notNull(),
     pincode: varchar("pincode", { length: 6 }).notNull(),
-    updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
-    createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => {
     return {
@@ -56,12 +70,17 @@ export const deliveryPersons = pgTable("delivery_persons", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 100 }).notNull(),
   phone: varchar("phone", { length: 13 }).notNull(),
-  warehousId: integer("warehous_id").references(() => warehouses.id, {
+  warehouseId: integer("warehouse_id").references(() => warehouses.id, {
     onDelete: "cascade",
   }),
   orderId: integer("order_id").references(() => orders.id, {
     onDelete: "set null",
   }),
-  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
-  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });

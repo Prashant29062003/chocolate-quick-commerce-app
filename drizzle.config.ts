@@ -1,5 +1,8 @@
 import { defineConfig } from "drizzle-kit";
-import { env } from "@/lib/validators/env";
+import { config } from "dotenv";
+import { resolve } from "path";
+
+config({ path: resolve(process.cwd(), ".env.local") });
 
 export default defineConfig({
   dialect: "postgresql",
@@ -7,6 +10,6 @@ export default defineConfig({
   out: "./drizzle",
   verbose: true,
   dbCredentials: {
-    url: env.DATABASE_URL,
+    url: process.env.DATABASE_URL!,
   },
 });
